@@ -1,11 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 export default function Header() {
     return (
         <header>
-            <Link to="/">Home</Link>
-            <Link to="/courses/css">CSS</Link>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/courses/css">CSS</NavLink>
         </header>
     );
 }
