@@ -41,22 +41,7 @@ const config = {
     },
     cache: true,
     devServer: {
-        stats: {
-            assets: true,
-            cached: false,
-            cachedAssets: false,
-            children: false,
-            chunks: false,
-            chunkModules: false,
-            colors: true,
-            hash: false,
-            modules: false,
-            reasons: false,
-            source: false,
-            timings: false,
-            version: false
-        },
-        hot: true,
+        stats: 'minimal',
         port: 3030,
         contentBase: PUBLIC_DIR,
         publicPath: PUBLIC_PATH,

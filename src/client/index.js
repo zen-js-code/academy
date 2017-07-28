@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {AppContainer} from 'react-hot-loader';
 
-import App from './app';
+import App from './navigation/';
 
 function renderApp() {
     render(
@@ -17,7 +17,7 @@ function renderApp() {
 }
 
 if (module.hot) {
-    module.hot.accept('./app', () => renderApp());
+    module.hot.accept('./navigation/', () => renderApp());
 }
 
 renderApp();
