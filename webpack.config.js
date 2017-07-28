@@ -65,7 +65,11 @@ const config = {
             ignored: [NODE_MODULES]
         },
         historyApiFallback: true,
-        watchContentBase: true
+        watchContentBase: true,
+        overlay: {
+            warnings: true,
+            errors: true
+        }
     },
     plugins: [
         new webpack.DllReferencePlugin({
@@ -93,8 +97,13 @@ const config = {
                 exclude: [NODE_MODULES],
                 use: [{
                     loader: 'babel-loader',
-                    query: {
+                    options: {
                         cacheDirectory: CACHE_DIR_PATH
+                    }
+                }, {
+                    loader: 'eslint-loader',
+                    options: {
+                        fix: true
                     }
                 }]
             }
