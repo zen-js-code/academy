@@ -24,7 +24,8 @@ const config = {
             'react-dom',
             'react-hot-loader',
             'react-router',
-            'react-router-dom'
+            'react-router-dom',
+            'warning'
         ]
     },
     output: {

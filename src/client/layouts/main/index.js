@@ -4,38 +4,30 @@ import Header from './Header';
 import Menu from './Menu';
 import Main from './Main';
 
+import './style/layout.scss';
+
 export default class MainLayout extends Component {
-    processLayout() {
+    getPart(Part) {
         const {children} = this.props;
 
-        return Children.map(children, (Child) => {
-            let MappedChild = null;
-
-            if (Child.type) {
-                if (Child.type.prototype instanceof Header) {
-                    return Child;
-                } else if (Child.type.prototype instanceof Menu) {
-                    return Child;
-                } else if (Child.type.prototype instanceof Main) {
-                    return Child;
-                }
-            }
-
-            return MappedChild;
+        return Children.toArray(children).filter((Child) => {
+            return Child.type && Child.type.prototype instanceof Part;
         });
     }
 
     render() {
-        this.processLayout();
+        const header = this.getPart(Header);
+        const menu = this.getPart(Menu);
+        const main = this.getPart(Main);
 
         return (
-            <div>
-                {this.processLayout()}
+            <div styleName="container">
+                <header styleName="header">{header}</header>
+                <main styleName="main">{main}</main>
+                <nav styleName="menu">{menu}</nav>
             </div>
         );
     }
-
-    static Header = Header;
 }
 
 export {Header, Menu, Main};

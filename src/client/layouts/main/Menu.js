@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 
 export default class Menu extends Component {
     render() {
-        return (
-            <nav>Menu</nav>
-        );
+        return this.props.children;
     }
 }

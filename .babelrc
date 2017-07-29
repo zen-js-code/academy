@@ -20,10 +20,13 @@
         "syntax-dynamic-import",
         "react-hot-loader/babel",
         ["react-css-modules", {
-            "generateScopedName": "[name]__[local]",
+            "generateScopedName": "[name]__[local]___[hash:base64:5]",
+            "webpackHotModuleReloading": true,
+            "exclude": "node_modules",
             "filetypes": {
                 ".scss": {
-                    "syntax": "postcss-scss"
+                    "syntax": "postcss-scss",
+                    "plugins": ["postcss-nested"]
                 }
             }
         }]

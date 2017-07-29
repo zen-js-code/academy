@@ -6,7 +6,7 @@ const {readJsonSync} = require('fs-extra');
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer');
 
 const ROOT = '.';
 
@@ -75,6 +75,43 @@ const config = {
     module: {
         rules: [
             {
+                test: /(\.scss|\.css)$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: true,
+                            sourceMap: true,
+                            modules: true,
+                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true,
+                            plugins: () => [
+                                autoprefixer({
+                                    browsers: ['last 2 Chrome versions']
+                                })
+                            ]
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            outputStyle: 'expanded'
+                        }
+                    }
+                ],
+                include: SRC_DIR,
+                exclude: [NODE_MODULES]
+            },
+            {
                 test: /\.js$/,
                 include: SRC_DIR,
                 exclude: [NODE_MODULES],
@@ -91,6 +128,12 @@ const config = {
                 }]
             }
         ]
+    },
+    resolve: {
+        alias: {
+            'base': PATH.resolve(SRC_DIR, 'style/base/'),
+            'theme': PATH.resolve(SRC_DIR, 'style/theme/')
+        }
     }
 };
 
