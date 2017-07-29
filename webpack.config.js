@@ -40,8 +40,10 @@ const config = {
         publicPath: PUBLIC_PATH
     },
     cache: true,
+    devtool: 'cheap-module-eval-source-map',
     devServer: {
         stats: 'minimal',
+        clientLogLevel: 'warning',
         port: 3030,
         contentBase: PUBLIC_DIR,
         publicPath: PUBLIC_PATH,
@@ -52,7 +54,7 @@ const config = {
         historyApiFallback: true,
         watchContentBase: true,
         overlay: {
-            warnings: true,
+            warnings: false,
             errors: true
         }
     },
@@ -61,10 +63,6 @@ const config = {
             manifest: PATH.resolve(JS_ASSETS_DIR, 'vendor.manifest.json'),
         }),
         new webpack.NamedModulesPlugin(),
-        new webpack.SourceMapDevToolPlugin({
-            filename: '[name].js.map',
-            columns: false
-        }),
         new HtmlWebpackPlugin({
             hash: false,
             filename: '../index.html',

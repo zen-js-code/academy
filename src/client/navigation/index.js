@@ -1,19 +1,14 @@
 import React from 'react';
-import {Redirect, Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
-import Home from './Home';
-import Course from './Course';
+import {Home} from '../modules/home/';
+import {Course} from '../modules/course/';
 
-import Header from '../components/header/Header';
-
-export default function App(props) {
+export default function App() {
     return (
-        <div>
-            <Header />
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/courses/:id" component={Course} />
-            </Switch>
-        </div>
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/courses/:id" component={Course} />
+        </Switch>
     );
 }
