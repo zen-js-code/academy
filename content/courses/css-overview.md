@@ -1,6 +1,6 @@
 ---
 title: CSS Overview
-tags: css, overview
+tags: [css, overview]
 ---
 
 # CSS Overview
