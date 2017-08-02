@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
-const ROOT = '.';
+const ROOT = '../..';
 
 const CACHE_DIR_PATH = PATH.resolve(__dirname, ROOT, '.cache/');
 const NODE_MODULES = PATH.resolve(__dirname, ROOT, 'node_modules/');
