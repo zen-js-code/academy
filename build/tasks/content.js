@@ -1,12 +1,14 @@
 'use strict';
 
+const PATH = require('path');
+
 const gulp = require('gulp');
 const del = require('del');
 
 const md = require('../plugins/md/');
 
-const SRC_CONTENT = ['content/courses/**/*.md'];
-const DEST_CONTENT = 'dist/';
+const SRC_CONTENT = 'content/**/*.md';
+const DEST_CONTENT = 'src/client/modules/';
 
 function build() {
     return gulp.src(SRC_CONTENT)

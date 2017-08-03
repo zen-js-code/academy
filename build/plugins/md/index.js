@@ -3,26 +3,27 @@
 const PATH = require('path');
 
 const promisify = require('util.promisify');
-const fse = require('fs-extra');
+const {readFileSync} = require('fs');
 
+const {upperFirst, camelCase} = require('lodash');
 const through = require('through2');
 const marked = promisify(require('marked'));
 const fm = require('front-matter');
 const VinylFile = require('vinyl');
-const hl = require('highlight.js');
+const Handlebars = require('handlebars');
 
 const Renderer = require('./renderer');
 
 const EMPTY = Buffer.from('');
 const DEFAULT_EXT = 'json';
 const THEME = 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css';
+const REACT_TEMPLATE_SRC = readFileSync(PATH.resolve(__dirname, './templates/reactTemplate.js'), 'utf-8');
+const REACT_TEMPLATE = Handlebars.compile(REACT_TEMPLATE_SRC);
 
-const createJSON = function(file, contents, meta) {
-    const {attributes = {}, ext = DEFAULT_EXT} = meta;
-    const {path} = file;
-
+const createReactFile = function(path, contents, {attributes = {}} = {}) {
     const {dir, name} = PATH.parse(path);
-    const targetPath = PATH.normalize(`${dir}/${name}.${ext}`);
+    const filename = upperFirst(camelCase(name));
+    const targetPath = PATH.normalize(`${dir}/${filename}.js`);
 
     const targetFile = new VinylFile({
         path: targetPath,
@@ -37,38 +38,18 @@ function processFrontMatter(contents = EMPTY) {
     return fm(stringContents);
 }
 
-async function processMarkdown(contents, renderer) {
-    return await marked(contents, {
-        highlight(code, lang) {
-            const languages = lang ? [lang] : undefined;
-            return hl.highlightAuto(code, languages).value;
-        },
-        renderer
-    });
-}
+async function createReactCode(path, contents) {
+    const {dir, name} = PATH.parse(path);
+    const className = upperFirst(camelCase(name));
+    const renderer = new Renderer();
 
-function createHTML(html, srcFile) {
-    const {cwd, base, stem} = srcFile;
-    const path = PATH.resolve(cwd, 'dist', PATH.relative(cwd, base), `${stem}.html`);
+    const code = (await marked(contents, {renderer})).trim();
+    const classCode = REACT_TEMPLATE({code, className});
 
-    const pageHTML = `<!DOCTYPE html>
-        <html>
-        <head>
-            <link rel="stylesheet" href="${THEME}">
-        </head>
-        <body>
-        ${html}
-        </body>
-        </html>
-    `;
-
-    return fse.outputFile(path, pageHTML);
+    return classCode;
 }
 
 function md(options = {}) {
-    const {ext} = options;
-    const renderer = new Renderer(options);
-
     return through.obj(async function(file, enc, callback) {
         let error = null, result;
 
@@ -77,17 +58,15 @@ function md(options = {}) {
         }
 
         try {
-            const {contents} = file;
+            const {path, contents} = file;
 
             const {attributes, body} = processFrontMatter(contents);
-            const html = await processMarkdown(body, renderer);
+            const reactCode = await createReactCode(path, body);
 
-            result = createJSON(file, JSON.stringify(renderer.getAll()), {attributes, ext});
-            await createHTML(html, file);
+            result = createReactFile(path, reactCode, {attributes});
         } catch (err) {
             error = err;
         } finally {
-            renderer.reset();
             callback(error, result);
         }
     });

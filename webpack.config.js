@@ -10,21 +10,22 @@ const autoprefixer = require('autoprefixer');
 
 const ROOT = '.';
 
-const CACHE_DIR_PATH = PATH.resolve(__dirname, ROOT, '.cache/');
+const CACHE_DIR = PATH.resolve(__dirname, ROOT, '.cache/');
 const NODE_MODULES = PATH.resolve(__dirname, ROOT, 'node_modules/');
 
 const SRC_DIR = PATH.resolve(__dirname, ROOT, 'src/client/');
 const INDEX_JS_FILE = PATH.resolve(SRC_DIR, 'index.js');
 const INDEX_HTML_FILE = PATH.resolve(SRC_DIR, 'index.html');
 
-const JS_DIR_NAME = 'js';
-const PUBLIC_PATH = `/${JS_DIR_NAME}/`;
+const JS_DIR = 'js';
+const PUBLIC_PATH = `/${JS_DIR}/`;
 const PUBLIC_DIR = PATH.resolve(__dirname, ROOT, 'dist/');
-const JS_ASSETS_DIR =  PATH.resolve(PUBLIC_DIR, `${JS_DIR_NAME}/`);
+const JS_ASSETS_DIR =  PATH.resolve(PUBLIC_DIR, `${JS_DIR}/`);
 
 const ASSETS_FILE_NAME = 'assets.json';
-const ASSETS_FILE_PATH = PATH.resolve(ROOT, PUBLIC_DIR, ASSETS_FILE_NAME);
-const ASSETS = readJsonSync(ASSETS_FILE_PATH);
+const ASSETS_DIR = PATH.resolve(ROOT, PUBLIC_DIR);
+const ASSET_FILE = PATH.resolve(ASSETS_DIR, ASSETS_FILE_NAME);
+const ASSETS = readJsonSync(ASSET_FILE);
 
 const config = {
     entry: {
@@ -118,12 +119,7 @@ const config = {
                 use: [{
                     loader: 'babel-loader',
                     options: {
-                        cacheDirectory: CACHE_DIR_PATH
-                    }
-                }, {
-                    loader: 'eslint-loader',
-                    options: {
-                        fix: true
+                        cacheDirectory: CACHE_DIR
                     }
                 }]
             }

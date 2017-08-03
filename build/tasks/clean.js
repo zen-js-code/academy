@@ -3,7 +3,7 @@
 const gulp = require('gulp');
 const del = require('del');
 
-const DEST = ['dist/']
+const DEST = ['src/client/modules/content/']
 
 function clean() {
     return del(DEST);
