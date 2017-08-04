@@ -14,3 +14,11 @@ function foo() {
     
 }
 ```
+
+Some random, perhaps __bolded__, text.
+
+```css
+.some__class {
+    border: 1px solid #cccccc;
+}
+```

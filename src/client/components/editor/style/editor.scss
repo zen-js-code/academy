@@ -1,3 +1,8 @@
+@import "~theme/colors";
+@import "~theme/typography";
+
 .editor {
     width: 100%;
+    margin-bottom: 20px;
+    display: flex;
 }

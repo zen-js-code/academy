@@ -1,3 +1,23 @@
+@import "~theme/colors";
+@import "~theme/typography";
+
+%heading {
+    margin-bottom: 20px;
+}
+
 .heading {
-    color: red;
+    &__h1 {
+        @extend %heading;
+        font-size: 36px;
+    }
+
+    &__h2 {
+        @extend %heading;
+        font-size: 24px;
+    }
+
+    &__h3 {
+        @extend %heading;
+        font-size: 18px;
+    }
 }

@@ -4,7 +4,7 @@ import './style/blocks.scss';
 
 function P(props) {
     return (
-        <h1 styleName="p">{props.children}</h1>
+        <p styleName="p">{props.children}</p>
     )
 }
 

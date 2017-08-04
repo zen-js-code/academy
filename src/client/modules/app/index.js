@@ -3,12 +3,14 @@ import {NavLink} from 'react-router-dom';
 
 import Layout, {Header, Main, Menu} from '../../layouts/main/';
 
+import './style/app.scss';
+
 export class App extends Component {
     render() {
         const Content = Children.only(this.props.children);
 
         return (
-            <Layout>
+            <Layout styleName="app">
                 <Header>
                     <NavLink to="/">Home</NavLink>
                     <span> | </span>

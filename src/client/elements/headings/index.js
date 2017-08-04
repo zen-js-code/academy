@@ -4,19 +4,19 @@ import './style/headings.scss';
 
 function H1(props) {
     return (
-        <h1 styleName="heading">{props.children}</h1>
+        <h1 styleName="heading__h1">{props.children}</h1>
     )
 }
 
 function H2(props) {
     return (
-        <h2 styleName="heading">{props.children}</h2>
+        <h2 styleName="heading__h2">{props.children}</h2>
     )
 }
 
 function H3(props) {
     return (
-        <h3 styleName="heading">{props.children}</h3>
+        <h3 styleName="heading__h3">{props.children}</h3>
     )
 }
 

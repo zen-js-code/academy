@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 
 import './style/base/reset.scss';
 import './style/theme/fonts.scss';
+import './style/theme/typography.scss';
 
 import AppContainer from './navigation/';
 

@@ -25,7 +25,7 @@ class Renderer extends marked.Renderer {
 
     code(text, lang = '') {
         const [language, mode] = lang.split('_');
-        return block('Editor', null, {language, mode})
+        return block('Editor', null, {language, mode, text})
     }
 }
 

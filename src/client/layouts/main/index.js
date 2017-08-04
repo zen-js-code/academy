@@ -16,12 +16,14 @@ export default class MainLayout extends Component {
     }
 
     render() {
+        const {className} = this.props;
+
         const header = this.getPart(Header);
         const menu = this.getPart(Menu);
         const main = this.getPart(Main);
 
         return (
-            <div styleName="container">
+            <div className={className} styleName="container">
                 <header styleName="header">{header}</header>
                 <main styleName="main">{main}</main>
                 <nav styleName="menu">{menu}</nav>
