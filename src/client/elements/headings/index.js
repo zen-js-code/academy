@@ -22,7 +22,7 @@ function H3(props) {
 
 function H4(props) {
     return (
-        <h4 styleName="heading">{props.children}</h4>
+        <h4 styleName="heading__h4">{props.children}</h4>
     )
 }
 

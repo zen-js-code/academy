@@ -8,15 +8,20 @@
 .heading {
     &__h1 {
         @extend %heading;
-        font-size: 36px;
+        font-size: 48px;
     }
 
     &__h2 {
         @extend %heading;
-        font-size: 24px;
+        font-size: 36px;
     }
 
     &__h3 {
+        @extend %heading;
+        font-size: 24px;
+    }
+
+    &__h4 {
         @extend %heading;
         font-size: 18px;
     }
